@@ -1,0 +1,22 @@
+﻿@using Flight_kursach.Services.Identity
+@using Flight_kursach.Views.Manage
+@using Microsoft.AspNetCore.Identity
+
+@inject SignInManager<TestSiteUser> SignInManager
+@{
+    var hasExternalLogins = (await SignInManager.GetExternalAuthenticationSchemesAsync()).Any();
+}
+
+<ul class="nav nav-pills">
+    <li class="@ManageNavPages.IndexNavClass(ViewContext)"><a asp-action="Index">Мой профиль</a></li> 
+    <p></p>
+    <li class="@ManageNavPages.ChangePasswordNavClass(ViewContext)"><a asp-action="ChangePassword">Сменить пароль</a></oi>
+    @if (hasExternalLogins)
+    {
+        <li class="@ManageNavPages.ExternalLoginsNavClass(ViewContext)"><a asp-action="ExternalLogins">Другой вход</a></li>
+    }
+
+</ul>
+
+        
+
